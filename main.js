@@ -1,7 +1,7 @@
 // main.js
 const { app, BrowserWindow, ipcMain } = require("electron")
 const path = require("path")
-const WWSCli = require("./wws-cli")
+const { WWSCli } = require("@breck/wws")
 
 function createWindow() {
   const win = new BrowserWindow({
