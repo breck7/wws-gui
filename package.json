@@ -4,10 +4,23 @@
   "description": "GUI for the World Wide Scroll",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.example.wwsgui",
+    "productName": "WWS GUI",
+    "files": [
+      "**/*"
+    ],
+    "asar": true,
+    "compression": "maximum",
+    "extraResources": []
   },
   "devDependencies": {
-    "electron": "^32.1.0"
+    "electron": "^32.1.0",
+    "electron-builder": "^25.0.5"
   },
   "dependencies": {
     "@breck/wws": "^0.11.0",

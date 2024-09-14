@@ -2,6 +2,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron")
 const path = require("path")
 const { WWSCli } = require("@breck/wws")
+const wwsCli = new WWSCli()
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -13,14 +14,20 @@ function createWindow() {
     },
   })
 
-  win.loadFile("index.html")
+  loadIndex(win)
+}
+
+const loadIndex = async (win) => {
+  await wwsCli.init()
+  await wwsCli.buildIndexPage()
+  const indexPath = path.join(wwsCli.wwsDir, "index.html")
+  win.loadFile(indexPath)
 }
 
 app.whenReady().then(createWindow)
 
 // Handle IPC calls from renderer process
 ipcMain.handle("execute-command", async (event, command) => {
-  const wwsCli = new WWSCli()
   let result = ""
   switch (command) {
     case "list":
